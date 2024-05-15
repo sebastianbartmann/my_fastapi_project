@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}List Management{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto py-4">
+    <h1 class="text-2xl font-bold text-center">Manage Your List</h1>
+    <form method="post" hx-post="/add-item" hx-target="#items-list" hx-swap="outerHTML" class="my-4">
+        <div class="flex items-center space-x-2">
+            <input type="text" name="item" placeholder="Add new item" class="flex-1 p-2 border border-gray-300 rounded" required>
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Add Item</button>
+        </div>
+    </form>
+    <ul id="items-list" class="list-disc space-y-2">
+        {% for item in items %}
+        <li class="flex justify-between items-center">
+            <span>{{ item }}</span>
+            <button hx-get="/remove-item/{{ loop.index0 }}" hx-target="#items-list" hx-swap="outerHTML"
+                    class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700">
+                Remove
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

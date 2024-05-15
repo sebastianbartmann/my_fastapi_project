@@ -1,0 +1,11 @@
+<ul id="items-list" class="list-disc space-y-2">
+    {% for item in items %}
+    <li class="flex justify-between items-center">
+        <span>{{ item }}</span>
+        <button hx-get="/remove-item/{{ loop.index0 }}" hx-target="#items-list" hx-swap="outerHTML"
+                class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700">
+            Remove
+        </button>
+    </li>
+    {% endfor %}
+</ul>
